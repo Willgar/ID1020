@@ -1,6 +1,5 @@
 package com.kth;
 
-import java.util.*;
 import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
