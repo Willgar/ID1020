@@ -39,9 +39,8 @@ public class lab14 {
     private static void addFirst(){
         if(first == null) {
             first = new node();
-            last = new node();
+            last = first;
             first.next = last;
-            last.next = first;
         }
         else {
             node newNode = new node();

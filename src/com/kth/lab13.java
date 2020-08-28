@@ -52,15 +52,14 @@ public class lab13 {
     }
 
     /**
-     * Skapar listans första och sista nod som är de 2 första noderna i listan och justerar dess framför och bakom.
+     * Skapar listan med en nod som är både första och sista.
      */
     private static void addFirstNodes(){
         first = new node();
-        last = new node();
+        last = first;
         first.next = last;
         first.prev = last;
-        last.next = first;
-        last.prev = first;
+        printNodes();
     }
 
     /**
@@ -78,8 +77,8 @@ public class lab13 {
      * Printar ut samtliga noder i listan.
      */
     private static void printNodes(){
-        node tempNode = first.next;
-        System.out.println(first.num);
+        node tempNode = first;
+        System.out.println(tempNode.num);
         tempNode = tempNode.next;
         while(tempNode != first){
             System.out.println(tempNode.num);
