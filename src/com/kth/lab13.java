@@ -5,6 +5,10 @@ package com.kth;
  * Lösning för labb 1 - Problem 3
  * En double linked circular list som använder sig av FIFO, där noderna i listan har koll på noden framför och bakom och
  * första och sista noden är sammankopplade vilket gör den cirkulär.
+ *
+ * Genom att låta programmet själv välja nummervärde till noderna så tillåts inte användaren göra misstag att skriva in
+ * felaktig information som skulle kunna förstöra. Det finns ingen riktig övre gräns till mängden noder men försöker man
+ * ta bort fler noder när det är tomt så händer inget nytt, det printar bara ut en tom parantes.
  */
 public class lab13 {
     private static node first;
@@ -25,6 +29,10 @@ public class lab13 {
     removeNode();
     addNode();
     removeNode();
+    removeNode();
+    removeNode();
+    removeNode();
+    removeNode();
     }
 
     /**
@@ -42,13 +50,17 @@ public class lab13 {
      * till den nya sista
      */
     private static void addNode(){
-        node newNode = new node();
-        first.prev = newNode;
-        last.next = newNode;
-        newNode.prev = last;
-        newNode.next = first;
-        last = newNode;
-        printNodes();
+        if(first == null){
+            addFirstNodes();
+        } else {
+            node newNode = new node();
+            first.prev = newNode;
+            last.next = newNode;
+            newNode.prev = last;
+            newNode.next = first;
+            last = newNode;
+            printNodes();
+        }
     }
 
     /**
@@ -67,9 +79,12 @@ public class lab13 {
      * Därefter så ändras den till den nya första och därmed är den gamla borta.
      */
     private static void removeNode(){
-        first.next.prev = last;
-        last.next = first.next;
-        first = first.next;
+        if(first == null || first.next == first){ first = null; }
+        else{
+                first.next.prev = last;
+                last.next = first.next;
+                first = first.next;
+        }
         printNodes();
     }
 
@@ -77,14 +92,19 @@ public class lab13 {
      * Printar ut samtliga noder i listan.
      */
     private static void printNodes(){
-        node tempNode = first;
-        System.out.println(tempNode.num);
-        tempNode = tempNode.next;
-        while(tempNode != first){
-            System.out.println(tempNode.num);
+        if(first == null) System.out.println("[ ]");
+        else {
+            System.out.print("[");
+            node tempNode = first;
+            System.out.print(tempNode.num);
             tempNode = tempNode.next;
+            while (tempNode != first) {
+                System.out.print(", ");
+                System.out.print(tempNode.num);
+                tempNode = tempNode.next;
+            }
+            System.out.println("]\n");
         }
-        System.out.println("\n");
     }
 }
 

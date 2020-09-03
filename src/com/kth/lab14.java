@@ -22,6 +22,10 @@ public class lab14 {
         removeFirst();
         addFirst();
         removeLast();
+        removeLast();
+        removeLast();
+        removeFirst();
+
     }
 
     /**
@@ -71,10 +75,15 @@ public class lab14 {
      * Tar bort den sista noden. Börjar med att hitta den näst sista noden och låter den ta den sista nodens plats.
      */
     private static void removeLast(){
-        node tempNode = first;
-        while(tempNode.next != last){ tempNode = tempNode.next;}
-        tempNode.next = first;
-        last = tempNode;
+        if(first == null || first.next == first){ first = null; }
+        else {
+            node tempNode = first;
+            while (tempNode.next != last) {
+                tempNode = tempNode.next;
+            }
+            tempNode.next = first;
+            last = tempNode;
+        }
         printNodes();
     }
 
@@ -82,8 +91,11 @@ public class lab14 {
      * Tar bort den första noden
      */
     private static void removeFirst(){
-        last.next = first.next;
-        first = first.next;
+        if(first == null || first.next == first){ first = null; }
+        else {
+            last.next = first.next;
+            first = first.next;
+        }
         printNodes();
     }
 
@@ -91,13 +103,18 @@ public class lab14 {
      * Printar ut samtliga noder i listan.
      */
     private static void printNodes(){
-        node tempNode = first;
-        System.out.println(tempNode.num);
-        tempNode = tempNode.next;
-        while(tempNode != first){
-            System.out.println(tempNode.num);
+        if(first == null) System.out.println("[ ]");
+        else {
+            System.out.print("[");
+            node tempNode = first;
+            System.out.print(tempNode.num);
             tempNode = tempNode.next;
+            while (tempNode != first) {
+                System.out.print(", ");
+                System.out.print(tempNode.num);
+                tempNode = tempNode.next;
+            }
+            System.out.println("]\n");
         }
-        System.out.println("\n");
     }
 }

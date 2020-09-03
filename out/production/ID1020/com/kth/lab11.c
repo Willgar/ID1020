@@ -2,6 +2,10 @@
   * ID1020
   * Första lösningen för labb 1 - Problem 1.
   * Använder en rekursiv och iterativ metod för att läsa in text från terminalen och sedan printa ut det i bakvänd ordning.
+  *
+  * Personligen tycker jag det är lättare med rekursivt då mängden kod är mindre och lättare att förstå och man enbart
+  * behöver en if sats och sedan kör rekursiven resten medan den iterativa varianten kräver 2 separata loopar, en för
+  * att hämta alla Characters och en för att skriva ut alla Characters.
   */
 #include <stdio.h>
 void recursiveC();
@@ -21,7 +25,7 @@ void recursiveC(){
   char c = getchar();
   if(c!='\n'){
     recursiveC();
-    putchar(c);
+    putchar("["c"],");
   }
 }
 /**

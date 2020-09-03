@@ -1,5 +1,13 @@
 package com.kth;
-
+/**
+ * ID1020
+ * Lösning för labb 1 - Problem 5
+ * En linked circular list som kan lägga in och ta bort saker från utvald indexplats, där noderna i listan har endast koll på noden framför och
+ * första och sista noden är sammankopplade vilket gör den cirkulär.
+ *
+ * Funktionerna är utformade så att k-värdet måste finnas bland dem index som existerar. De som är utanför kommer returnera
+ * ett error No such node och när de är slut på noder så returneras bara en tom lista.
+ */
 public class lab15 {
     private static node first;
     private static node last;
@@ -13,6 +21,12 @@ public class lab15 {
         addNode();
         addNode();
         removeKthNode(3);
+        removeKthNode(4);
+        removeKthNode(-2);
+        removeKthNode(2);
+        removeKthNode(1);
+        removeKthNode(1);
+        removeKthNode(1);
     }
 
     /**
@@ -43,33 +57,74 @@ public class lab15 {
         printNodes();
     }
 
+    /**
+     * Hittar noden på Kth platsen för att sedan ta bort den och koppla ihop listan igen.
+     * @param k Platsen på noden.
+     */
+
     private static void removeKthNode(int k){
         node tempNode = first;
-        if(last.num >= k) {
+        //tom lista sker inget
+        if(tempNode == null){ printNodes(); }
+        //Kollar första talet
+        else if(tempNode.num == k){
+            //Kollar ifall listan har fler än ett element
+            if(tempNode.next == tempNode){
+                first = null;
+                last = null;
+            } else{
+                tempNode = tempNode.next;
+                last.next = tempNode;
+                first = tempNode;
+            }
+            printNodes();
+        }
+        else if(last.num >= k && first.num <= k) {
             while (tempNode.next.num != k) {
                 tempNode = tempNode.next;
             }
             tempNode.next = tempNode.next.next;
-            if(tempNode.next == last){last = tempNode;}
-
-        } else{System.out.println("No such node");}
-        printNodes();
+            printNodes();
+        }
+        else {System.out.println("No such node");}
     }
+    /*
+    private static void removeKthNode(int k){
+        node tempNode = first;
+        if(first == last && k == first.num){ first = null; last = null; }
+        else if(last.num >= k && first.num <= k) {
+            if(tempNode.num == k){
+                tempNode = tempNode.next;
+                if(tempNode.next == last){last = tempNode;}
+            } else{
+            while (tempNode.next.num != k) {
+                tempNode = tempNode.next;
+            }}
+            tempNode.next = tempNode.next.next;
+            if(tempNode.next == last){last = tempNode;}
+            printNodes();
+        } else{System.out.println("No such node");}
+    }*/
 
 
     /**
      * Printar ut samtliga noder i listan.
      */
     private static void printNodes(){
-        changeNodeIndex();
-        node tempNode = first;
-        System.out.println(tempNode.num);
-        tempNode = tempNode.next;
-        while(tempNode != first){
-            System.out.println(tempNode.num);
+        if(first == null) System.out.println("[ ]");
+        else {
+            changeNodeIndex();
+            System.out.print("[");
+            node tempNode = first;
+            System.out.print(tempNode.num);
             tempNode = tempNode.next;
+            while (tempNode != first) {
+                System.out.print(", ");
+                System.out.print(tempNode.num);
+                tempNode = tempNode.next;
+            }
+            System.out.println("]\n");
         }
-        System.out.println("\n");
     }
     private static void changeNodeIndex(){
         node tempNode = first;

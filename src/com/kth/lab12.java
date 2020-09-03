@@ -9,6 +9,8 @@ import edu.princeton.cs.algs4.StdOut;
  * ID1020
  * Lösning för labb 1 - Problem 2
  * Använder en rekursiv och iterativ metod med hjälp av Stacks från 1.3
+ *
+ * All input som man skriver in i terminalen är en typ av Characters så några utförliga tester kändes ej nödvändiga.
  */
 public class lab12 {
     public static void main(String[] args) {
