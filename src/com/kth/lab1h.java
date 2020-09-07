@@ -17,35 +17,65 @@ public class lab1h {
     }
     private static void checkParenthesis(){
         char c = StdIn.readChar();
-        int parenthesis = 0;
-        int brackets = 0;
-        int braces = 0;
         while(c != '\n'){
             switch(c){
                 case '[':
-                    brackets++;
-                    break;
                 case '{':
-                    braces++;
-                    break;
                 case '(':
-                    parenthesis++;
+                    balanceParanthesis(c);
                     break;
                 case ']':
-                    brackets--;
+                case ')':
+                case '}':
+                    System.out.println("The amount of parenthesis are unbalanced");
+                    break;
+            }
+            c = StdIn.readChar();
+        }
+    }
+
+    /**
+     * Loopar tills att man hittat motsvarig slutparantes, ifall fel slutparantes hittas så
+     * @param k
+     */
+    static void balanceParanthesis(char k){
+        boolean paranthes = false;
+        boolean bracket = false;
+        boolean brace = false;
+        switch(k){
+            case'(':
+                paranthes = true;
+                break;
+            case '[':
+                bracket = true;
+                break;
+            case '{':
+                brace = true;
+                break;
+            }
+        char c = StdIn.readChar();
+        while(c != '\n'){
+            switch(c){
+                case ')':
+                    if(paranthes){return;}
+                    else{System.out.println("The amount of parenthesis are unbalanced");}
+                    break;
+                case ']':
+                    if(bracket){return;}
+                    else{System.out.println("The amount of brackets are unbalanced");}
                     break;
                 case '}':
-                    braces--;
+                    if(brace){return;}
+                    else{System.out.println("The amount of braces are unbalanced");}
                     break;
-                case ')':
-                    parenthesis--;
+                case '[':
+                case '{':
+                case '(':
+                    balanceParanthesis(c);
                     break;
             }
             c = StdIn.readChar();
         }
 
-        if(parenthesis!= 0) System.out.println("The amount of parenthesis are unbalanced");
-        if(brackets!= 0) System.out.println("The amount of brackets are unbalanced");
-        if(braces!= 0) System.out.println("The amount of braces are unbalanced");
     }
 }
