@@ -4,12 +4,8 @@ import edu.princeton.cs.algs4.StdIn;
  * ID1020
  * Lösning för labb 1 - Higher assigment problem
  * Med hjälp av StdIn metoden från princeton från andra problemet så läser algoritmen in varje character för sig och
- * ser ifall de är en parantes(eller liknande) med en switch case. Eftersom det enbart är en vanlig while loop med
- * "vanliga" operationer inuti så har den tidskomplexiteten O(n).
- *
- * För varje vänsterparantes så läggs indexet för typen av parantes +1, men motsvarande högerparantes ger -1 för att
- * "balansera" ut paranteserna. I slutet kollar den alla parantesindex och ifall de är 0 så är de balanserat annars är
- * det obalanserat.
+ * ser ifall de är en parantes(eller liknande) med en switch case.
+ * Algoritmen loopar endast igenom inputen en gång och har därmed tidskomplexiteten N.
  */
 public class lab1h {
     public static void main(String[] args) {
@@ -35,8 +31,10 @@ public class lab1h {
     }
 
     /**
-     * Loopar tills att man hittat motsvarig slutparantes, ifall fel slutparantes hittas så
-     * @param k
+     * Loopar tills att man hittat motsvarig slutparantes, ifall fel slutparantes hittas så skrivs error ut att
+     * paranteserna är obalanserade. Ifall ny startparantes hittats så börjar den med rekursiv funktion leta efter den
+     * nya startparantesens slutparantes innan den fortsätter med tidigare parantes.
+     * @param k Typen av startparantes
      */
     static void balanceParanthesis(char k){
         boolean paranthes = false;
@@ -76,6 +74,7 @@ public class lab1h {
             }
             c = StdIn.readChar();
         }
+        System.out.println("No end paranthesis found");
 
     }
 }
