@@ -6,6 +6,7 @@ import edu.princeton.cs.algs4.StdIn;
  * Med hjälp av StdIn metoden från princeton från andra problemet så läser algoritmen in varje character för sig och
  * ser ifall de är en parantes(eller liknande) med en switch case.
  * Algoritmen loopar endast igenom inputen en gång och har därmed tidskomplexiteten N.
+ * Minneskomplexiteten är O(1). Ingenting av värde sparas. 
  */
 public class lab1h {
     public static void main(String[] args) {
