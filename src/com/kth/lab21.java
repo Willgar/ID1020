@@ -1,12 +1,13 @@
 package com.kth;
 import edu.princeton.cs.algs4.StdIn;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
  * ID1020
  * William Axbrink 2020-09-10
- * Lösning för labb 2 - Problem 1
+ * Lösning för labb 2 - Problem 1 och 2
  * En insertionSort återskapad baserat på hur principen av den ska fungera.
  *
  * Testerna sker i main och i swap-funktionen så skrivs vilka element som byts ut och sedan printas hela arrayen i dess
@@ -29,6 +30,7 @@ public class lab21 {
         for(int i = 0; i<arraySize; i++){
             customArray[i] = sc.nextInt();
         }
+        inversionCounter(customArray);
         customArray = insertionSort(customArray);
     }
     static int[] insertionSort(int array[]){
@@ -68,4 +70,42 @@ public class lab21 {
         }
         System.out.println("");
     }
+
+    /**
+     * Lab 2 - Problem 3
+     *
+     * Första lösningen var en simpel nestlad loop som då har tidskomplexiteten O(n^2) och minneskomplexiteten O(1).
+     * Men efter att läst mer så fann jag en variant på mergesort, merge and count, för inversions.
+     */
+
+    static void inversionCounter(int[] array){
+        int inversion = 0;
+        for(int i = 0; i<array.length-1; i++){
+            for(int j = i+1; j<array.length; j++){
+                if(array[i]>array[j]){
+                    inversion++;
+                    System.out.print("([" + i + "," + array[i] + "][" + j + "," + array[j] + "])");
+                }
+                System.out.print("\n");
+            }
+        }
+        System.out.println(" \n Number of inversions: " + inversion);
+    }
+
+    /*static void mergeInversion(int[] array, int left, int middle, int right){
+        int[] leftArray = Arrays.copyOfRange(array, left, middle+1);
+        int[] rightArray = Arrays.copyOfRange(array, middle+1, right+1);
+
+        int i = 0,j = 0,k = 1,swaps = 0;
+        while(i<leftArray.length && j<rightArray.length){
+            if(leftArray[i]<=rightArray[j]){
+                array[k++] = leftArray[i++];
+            }
+            else{
+                array[k++] = rightArray[j++];
+                swaps+=(middle + 1) - (left-i);
+            }
+        }
+
+    }*/
 }
