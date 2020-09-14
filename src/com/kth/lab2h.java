@@ -1,34 +1,25 @@
 package com.kth;
-/**
- * ID1020
- * William Axbrink 2020-09-14
- * Lösning för labb 2 - Problem 5
- * En jämförelse av InsertionSort och MergeSort. Jämför slumpmässigt fyllda arrays i olika storlekar.
- * Varje storlek på array jämförs med 10 000 varianter på den storleken för att få fram en snittid.
- * Graf av resultaten från ett av testerna finnes via länken nedanför till Google SpreadSheet.
- * https://docs.google.com/spreadsheets/d/1rMBhqunVCJ8SZVE-dcaptNfpR1GaC2nhHkqimTzExiM/edit?usp=sharing
- *
- * Från testerna och grafen kan man se att för listor med upp till 100 element så vinner InsertionSort oftare men efter 100 så
- */
 
 import java.util.Random;
-public class lab25 {
+
+public class lab2h {
     public static void main(String[] args) {
-        /*Uppgift 2.5*/
-        for(int i = 1; i < 8193; i=i*2){
+
+        for(int i = 1; i < 100000; i+=10000){
             System.out.println(i + " elements");
             long mergeTime = 0;
-            long insertionTime = 0;
-            for(int j = 0; j<10000; j++){
+            long quickTime = 0;
+            for(int j = 0; j<1000; j++){
                 int[] arrMerge = createArray(i);
-                int[] arrInsertion = arrMerge.clone();
+                int[] arrQuick = arrMerge.clone();
                 mergeTime += measureMerge(arrMerge);
-                insertionTime += measureInsertion(arrInsertion);
+                quickTime += measureQuick(arrQuick);
             }
-            System.out.println("MergeSort: " + (mergeTime/10000) + " ns");
-            System.out.println("InsertionSort: " + (insertionTime/10000) + " ns");
+            System.out.println("MergeSort: " + (mergeTime/1000) + " ns");
+            System.out.println("Quicksort: " + (quickTime/1000) + " ns");
         }
-
+        int arr[] = {10, 7, 8, 9, 1, 5,5,-1,4,12};
+        quickSort(arr, 0, arr.length-1);
     }
 
     private static long measureMerge(int arr[]){
@@ -38,9 +29,9 @@ public class lab25 {
         //System.out.println("MergeSort: " + (timeElapsed) + " ns");
         return endTime - startTime;
     }
-    private static long measureInsertion(int arr[]){
+    private static long measureQuick(int arr[]){
         long startTime2 = System.nanoTime();
-        arr = insertionSort(arr);
+        quickSort(arr, 0, arr.length-1);
         long endTime2 = System.nanoTime();
         //System.out.println("InsertionSort: " + (timeElapsed2) + " ns");
         return endTime2 - startTime2;
@@ -59,6 +50,33 @@ public class lab25 {
             System.out.print(value + ", ");
         }
         System.out.print("\n");
+    }
+    static int partition(int[] arr, int low, int high){
+        int pivot = arr[high];
+        int i = (low-1);
+
+        for(int j = low; j<= high; j++){
+            //Om något element är mindre än pivot
+            if(arr[j] < pivot){
+                i++;
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+        int temp = arr[i+1];
+        arr[i+1] = arr[high];
+        arr[high] = temp;
+
+        return i+1;
+    }
+    static void quickSort(int[] arr, int low, int high){
+        if(low<high){
+            int pi = partition(arr, low, high);
+
+            quickSort(arr, low, pi-1);
+            quickSort(arr, pi+1, high);
+        }
     }
 
     private static void merge(int arr[], int left, int mid, int right)
@@ -122,31 +140,4 @@ public class lab25 {
         }
     }
 
-
-    static int[] insertionSort(int array[]){
-        //For loop för att loopa igenom hela arrayen
-        for(int i = 1; i<array.length;i++){
-            /**Jämför två element för att se ifall den framför är mindre än den framför. Om de är True så byter dem plats
-             och då jämförs det elementet med resten av listan bakifrån.*/
-            if(array[i]<array[i-1]){
-                array = swap(array, i, i-1);
-                /**Jämför värdet med resten av listan med ny variabel j så huvudloopen förblir på samma index*/
-                for(int j = i-1; j>0;j--){
-                    if(array[j]<array[j-1]){
-                        array = swap(array, j, j-1);
-                    }
-                }
-            }
-        }
-        return array;
-    }
-
-    //Byter plats på punkterna i i och j. Skriver ut högt för demonstreringssyfte vilka två element som bytes ut.
-    //Printar även ut hela array i samms syfte.
-    static int[] swap(int array[], int i, int j){
-        int temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-        return array;
-    }
 }
