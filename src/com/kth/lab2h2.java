@@ -14,7 +14,7 @@ import java.util.Random;
  * så är MergeSort bättre för länkade listor medan quicksort är bättre för arrays.
  *
  */
-public class lab2h {
+public class lab2h2 {
     public static void main(String[] args) {
         for(int i = 10000; i < 1000000; i+=10000){
             System.out.println(i + " elements");
