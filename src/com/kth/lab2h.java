@@ -1,11 +1,22 @@
 package com.kth;
 
 import java.util.Random;
-
+/**
+ * ID1020
+ * William Axbrink 2020-09-15
+ * Lösning för labb 2 - Higher Assigment 2
+ * En jämförelse av MergeSort  och QuickSort. Jämför slumpmässigt fyllda arrays i olika storlekar.
+ * Varje storlek på arrayerna jämförs med 1000 varianter på den storleken för att få fram en snittid.
+ * Graf av resultaten från ett av testerna finnes via länken nedanför till Google SpreadSheet.
+ * https://docs.google.com/spreadsheets/d/1rMBhqunVCJ8SZVE-dcaptNfpR1GaC2nhHkqimTzExiM/edit?usp=sharing
+ *
+ * Allmänt så är QuickSort snabbare än MergeSort. Men med minneskomplexiteten och att quicksort har in-place memory
+ * så är MergeSort bättre för länkade listor medan quicksort är bättre för arrays.
+ *
+ */
 public class lab2h {
     public static void main(String[] args) {
-
-        for(int i = 1; i < 100000; i+=10000){
+        for(int i = 10000; i < 1000000; i+=10000){
             System.out.println(i + " elements");
             long mergeTime = 0;
             long quickTime = 0;

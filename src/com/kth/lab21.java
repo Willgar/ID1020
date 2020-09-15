@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * ID1020
  * William Axbrink 2020-09-10
- * Lösning för labb 2 - Problem 1 och 2
+ * Lösning för labb 2 - Problem 1, 2 och higher assigment 1
  * En insertionSort återskapad baserat på hur principen av den ska fungera.
  *
  * Testerna sker i main och i swap-funktionen så skrivs vilka element som byts ut och sedan printas hela arrayen i dess
