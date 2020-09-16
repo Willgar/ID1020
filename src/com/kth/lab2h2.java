@@ -11,7 +11,7 @@ import java.util.Random;
  * https://docs.google.com/spreadsheets/d/1rMBhqunVCJ8SZVE-dcaptNfpR1GaC2nhHkqimTzExiM/edit?usp=sharing
  *
  * Allmänt så är QuickSort snabbare än MergeSort. Men med minneskomplexiteten och att quicksort har in-place memory
- * så är MergeSort bättre för länkade listor medan quicksort är bättre för arrays.
+ * så är MergeSort bättre för länkade listor medan quicksort är bättre för arrays. Mergesort är dock stabilare.
  *
  */
 public class lab2h2 {

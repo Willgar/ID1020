@@ -7,7 +7,7 @@ import java.util.Scanner;
 /**
  * ID1020
  * William Axbrink 2020-09-10
- * Lösning för labb 2 - Problem 1, 2 och higher assigment 1
+ * Lösning för labb 2 - Problem 1, 2, 3 och higher assigment 1
  * En insertionSort återskapad baserat på hur principen av den ska fungera.
  *
  * Testerna sker i main och i swap-funktionen så skrivs vilka element som byts ut och sedan printas hela arrayen i dess
@@ -19,7 +19,7 @@ public class lab21 {
     public static void main(String[] args) {
         int[] array = {2,1,16,71,32,82,33, -10,12,14};
         printArray(array);
-        array = insertionSort(array);
+        array = insertionSortHigherAssignment(array);
         System.out.println(array.length);
         n = 0;
 
@@ -39,7 +39,26 @@ public class lab21 {
         //Har ändrat på större/mindre än tecknena för Higher Grade 1.
         for(int i = 1; i<array.length;i++){
             /**Jämför två element för att se ifall den framför är mindre än den framför. Om de är True så byter dem plats
-              och då jämförs det elementet med resten av listan bakifrån.*/
+             och då jämförs det elementet med resten av listan bakifrån.*/
+            if(array[i]<array[i-1]){
+                array = swap(array, i, i-1);
+                /**Jämför värdet med resten av listan med ny variabel j så huvudloopen förblir på samma index*/
+                for(int j = i-1; j>0;j--){
+                    if(array[j]<array[j-1]){
+                        array = swap(array, j, j-1);
+                    }
+                }
+            }
+        }
+        return array;
+    }
+
+    static int[] insertionSortHigherAssignment(int array[]){
+        //For loop för att loopa igenom hela arrayen
+        //Har ändrat på större/mindre än tecknena för Higher Grade 1.
+        for(int i = 1; i<array.length;i++){
+            /**Jämför två element för att se ifall den framför är mindre än den framför. Om de är True så byter dem plats
+             och då jämförs det elementet med resten av listan bakifrån.*/
             if(array[i]>array[i-1]){
                 array = swap(array, i, i-1);
                 /**Jämför värdet med resten av listan med ny variabel j så huvudloopen förblir på samma index*/
@@ -51,7 +70,7 @@ public class lab21 {
             }
         }
         return array;
-        }
+    }
 
         //Byter plats på punkterna i i och j. Skriver ut högt för demonstreringssyfte vilka två element som bytes ut.
     //Printar även ut hela array i samms syfte.

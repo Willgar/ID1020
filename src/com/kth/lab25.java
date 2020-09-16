@@ -8,7 +8,7 @@ package com.kth;
  * Graf av resultaten från ett av testerna finnes via länken nedanför till Google SpreadSheet.
  * https://docs.google.com/spreadsheets/d/1rMBhqunVCJ8SZVE-dcaptNfpR1GaC2nhHkqimTzExiM/edit?usp=sharing
  *
- * Från testerna och grafen kan man se att för listor med upp till 100 element så vinner InsertionSort oftare men efter 100 så
+ * Från testerna och grafen kan man se att för listor med upp till 100 element så vinner InsertionSort oftare men efter 100 så vinner MergeSort
  */
 
 import java.util.Random;

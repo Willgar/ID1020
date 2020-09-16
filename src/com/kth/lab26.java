@@ -1,5 +1,6 @@
 package com.kth;
 
+import java.util.Arrays;
 import java.util.Random;
 /**
  * ID1020
@@ -24,6 +25,8 @@ public class lab26 {
                 int[] arrMerge = arrMergeInsert.clone();
                 mergeInsertTime += measureMergeInsert(arrMergeInsert,i);
                 mergeTime += measureMerge(arrMerge);
+                if(!Arrays.equals(arrMerge, arrMergeInsert))
+                    System.out.print("ERROR");
             }
             System.out.println("MergeSortInsert: " + (mergeInsertTime/100000) + " ns");
             System.out.println("MergeSort: " + (mergeTime/100000) + " ns");
