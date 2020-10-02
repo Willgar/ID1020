@@ -69,11 +69,17 @@ public class lab4h {
 
         lab4h testSP2 = new lab4h(testGraph, 1);
         System.out.println(testSP2.distTo(5));
-
+        Scanner in = new Scanner(System.in);
         while(true){
             System.out.println("From which station?");
+            int start = in.nextInt();
             System.out.println("Which middle station?");
+            int middle = in.nextInt();
             System.out.println("To which station?");
+            int end = in.nextInt();
+            lab4h SPAB = new lab4h(Graph, start);
+            lab4h SPBC = new lab4h(Graph, middle);
+            System.out.println("Shortest distance from A to C with a middle stop at B is: " + (SPAB.distTo(middle)+SPBC.distTo(end)) + " meter");
         }
     }
 
