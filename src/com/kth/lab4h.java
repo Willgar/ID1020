@@ -16,22 +16,23 @@ public class lab4h {
     private static lab4h[] all;
 
     public static void main(String[] args) throws FileNotFoundException {
-
-        File file = new File("D:\\projects\\ID1020\\src\\com\\kth\\NYC.txt");
+        //File file = new File("D:\\projects\\ID1020\\src\\com\\kth\\NYC.txt");
+        File file = new File("C:\\Users\\Willi\\Documents\\ID1020\\ID1020\\src\\com\\kth\\NYC.txt");
         Scanner fi = new Scanner(file);
         Bag<lab4DirectedEdge> checkN = new Bag<>();
         lab4EdgeWeightedDigraph Graph = new lab4EdgeWeightedDigraph(264346);
         fi.nextLine();fi.nextLine();
-        for(int i = 0; i<= 733846; i++) {        //Lägger in alla edges till grafen
+        for(int i = 0; i< 733846; i++) {        //Lägger in alla edges till grafen
             try {
                 Graph.addEdge(new lab4DirectedEdge(fi.nextInt(), fi.nextInt(), fi.nextInt()));
             }
             catch(Exception e){
-                System.out.println("error");
+                System.out.println("error" + i);
             }
         }
-        lab4h[] pairs = allPairs(Graph);
-
+        //lab4h[] pairs = allPairs(Graph);
+        lab4h testSP = new lab4h(Graph, 10);
+        System.out.println(testSP.distTo(5));
 
         lab4DirectedEdge test1 = new lab4DirectedEdge(0,2,0.26);
         lab4DirectedEdge test2 = new lab4DirectedEdge(0,4,0.38);
@@ -66,16 +67,14 @@ public class lab4h {
         testGraph.addEdge(test14);
         testGraph.addEdge(test15);
 
-        //lab4h[] pairs = allPairs(testGraph);
-        System.out.println(pairs);
-    }
+        lab4h testSP2 = new lab4h(testGraph, 1);
+        System.out.println(testSP2.distTo(5));
 
-    public static lab4h[] allPairs(lab4EdgeWeightedDigraph G){
-        all = new lab4h[G.V()];
-        for(int v = 0; v<G.V(); v++){
-            all[v] = new lab4h(G, v);
+        while(true){
+            System.out.println("From which station?");
+            System.out.println("Which middle station?");
+            System.out.println("To which station?");
         }
-        return all;
     }
 
     public lab4h(lab4EdgeWeightedDigraph G, int src){
@@ -83,7 +82,7 @@ public class lab4h {
         distTo = new double[G.V()];
         pq = new IndexMinPQ<Double>(G.V());
 
-        for(int v = 0; v>G.V(); v++)
+        for(int v = 0; v<G.V(); v++)
             distTo[v] = Double.POSITIVE_INFINITY;
         pq = new IndexMinPQ<>(G.V());
 
@@ -111,6 +110,7 @@ public class lab4h {
     public boolean hasPathTo(int v){
         return distTo[v] < Double.POSITIVE_INFINITY;
     }
+
     public Iterable<lab4DirectedEdge> pathTo(int v){
         if (!hasPathTo(v)) return null;
         Stack<lab4DirectedEdge> path = new Stack<lab4DirectedEdge>();
