@@ -19,20 +19,11 @@ public class lab4h {
         //File file = new File("D:\\projects\\ID1020\\src\\com\\kth\\NYC.txt");
         File file = new File("C:\\Users\\Willi\\Documents\\ID1020\\ID1020\\src\\com\\kth\\NYC.txt");
         Scanner fi = new Scanner(file);
-        Bag<lab4DirectedEdge> checkN = new Bag<>();
         lab4EdgeWeightedDigraph Graph = new lab4EdgeWeightedDigraph(264346);
         fi.nextLine();fi.nextLine();
         for(int i = 0; i< 733846; i++) {        //Lägger in alla edges till grafen
-            try {
                 Graph.addEdge(new lab4DirectedEdge(fi.nextInt(), fi.nextInt(), fi.nextInt()));
-            }
-            catch(Exception e){
-                System.out.println("error" + i);
-            }
         }
-        //lab4h[] pairs = allPairs(Graph);
-        lab4h testSP = new lab4h(Graph, 10);
-        System.out.println(testSP.distTo(5));
 
         lab4DirectedEdge test1 = new lab4DirectedEdge(0,2,0.26);
         lab4DirectedEdge test2 = new lab4DirectedEdge(0,4,0.38);
@@ -83,7 +74,7 @@ public class lab4h {
         }
     }
 
-    public lab4h(lab4EdgeWeightedDigraph G, int src){
+    private lab4h(lab4EdgeWeightedDigraph G, int src){
         edgeTo = new lab4DirectedEdge[G.V()];
         distTo = new double[G.V()];
         pq = new IndexMinPQ<Double>(G.V());
@@ -110,14 +101,14 @@ public class lab4h {
             }
         }
     }
-    public double distTo(int v){
+    private double distTo(int v){
         return distTo[v];
     }
-    public boolean hasPathTo(int v){
+    private boolean hasPathTo(int v){
         return distTo[v] < Double.POSITIVE_INFINITY;
     }
 
-    public Iterable<lab4DirectedEdge> pathTo(int v){
+    private Iterable<lab4DirectedEdge> pathTo(int v){
         if (!hasPathTo(v)) return null;
         Stack<lab4DirectedEdge> path = new Stack<lab4DirectedEdge>();
         for (lab4DirectedEdge e = edgeTo[v]; e != null; e = edgeTo[e.from()])
