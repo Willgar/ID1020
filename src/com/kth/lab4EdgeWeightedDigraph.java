@@ -21,7 +21,7 @@ public class lab4EdgeWeightedDigraph {
     { return adj[v]; }
 
     public void addEdge(lab4DirectedEdge e){
-        adj[e.from()].add(e);
+        adj[e.from()].add(e); //Lägger till kant till hörnet v
         E++;
     }
     public Iterable<lab4DirectedEdge> edges(){

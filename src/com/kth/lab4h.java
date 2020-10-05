@@ -16,13 +16,12 @@ public class lab4h {
     private static lab4h[] all;
 
     public static void main(String[] args) throws FileNotFoundException {
-        //File file = new File("D:\\projects\\ID1020\\src\\com\\kth\\NYC.txt");
-        File file = new File("C:\\Users\\Willi\\Documents\\ID1020\\ID1020\\src\\com\\kth\\NYC.txt");
+        File file = new File("D:\\projects\\ID1020\\src\\com\\kth\\NYC.txt");
         Scanner fi = new Scanner(file);
-        lab4EdgeWeightedDigraph Graph = new lab4EdgeWeightedDigraph(264346);
-        fi.nextLine();fi.nextLine();
+        lab4EdgeWeightedDigraph NYCGraph = new lab4EdgeWeightedDigraph(264346);
+        fi.nextLine();fi.nextLine(); //Skippar de 2 första raderna bestående av info av datan
         for(int i = 0; i< 733846; i++) {        //Lägger in alla edges till grafen
-                Graph.addEdge(new lab4DirectedEdge(fi.nextInt(), fi.nextInt(), fi.nextInt()));
+            NYCGraph.addEdge(new lab4DirectedEdge(fi.nextInt(), fi.nextInt(), fi.nextInt()));
         }
 
         lab4DirectedEdge test1 = new lab4DirectedEdge(0,2,0.26);
@@ -58,8 +57,12 @@ public class lab4h {
         testGraph.addEdge(test14);
         testGraph.addEdge(test15);
 
-        lab4h testSP2 = new lab4h(testGraph, 1);
-        System.out.println(testSP2.distTo(5));
+        lab4h testSP2 = new lab4h(testGraph, 0);
+        for(int i = 1; i<= 7;i++) {
+            System.out.println(testSP2.distTo(i));
+            System.out.println(testSP2.pathTo(i));
+        }
+
         Scanner in = new Scanner(System.in);
         while(true){
             System.out.println("From which station?");
@@ -68,8 +71,8 @@ public class lab4h {
             int middle = in.nextInt();
             System.out.println("To which station?");
             int end = in.nextInt();
-            lab4h SPAB = new lab4h(Graph, start);
-            lab4h SPBC = new lab4h(Graph, middle);
+            lab4h SPAB = new lab4h(NYCGraph, start);
+            lab4h SPBC = new lab4h(NYCGraph, middle);
             System.out.println("Shortest distance from A to C with a middle stop at B is: " + (SPAB.distTo(middle)+SPBC.distTo(end)) + " meter");
         }
     }
@@ -80,19 +83,19 @@ public class lab4h {
         pq = new IndexMinPQ<Double>(G.V());
 
         for(int v = 0; v<G.V(); v++)
-            distTo[v] = Double.POSITIVE_INFINITY;
+            distTo[v] = Double.POSITIVE_INFINITY;       //Sätter samtliga distans från src till andra hörn till oändlighet
         pq = new IndexMinPQ<>(G.V());
 
-        distTo[0] = 0.0;
+        distTo[0] = 0.0;        //Distansen till src(sig själv) är 0.
         pq.insert(0,0.0);
-        while(!pq.isEmpty())
+        while(!pq.isEmpty())    //Relaxar grafen tills PQ är tom
             relax(G, pq.delMin());
     }
     private void relax(lab4EdgeWeightedDigraph G, int v){
         for(lab4DirectedEdge e : G.adj(v)){
             int w = e.to();
-            if(distTo[w]>distTo[v] + e.weight()){
-                distTo[w] = distTo[v]+e.weight();
+            if(distTo[w]>distTo[v] + e.weight()){   //Kollar ifall distansen till hörnet är kortare än föregående väg
+                distTo[w] = distTo[v]+e.weight();   //Om hörnet ej har besökts än så är distansen INF och då garanterat kortare
                 edgeTo[w] = e;
                 if(pq.contains(w))
                     pq.change(w, distTo[w]);
